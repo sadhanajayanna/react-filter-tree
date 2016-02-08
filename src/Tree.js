@@ -60,17 +60,12 @@ export function getVisibleMatches (tree, text) {
 }
 
 export function getParentsForList (list) {
-  let hasParents = _.compact(_.map(list, 'parentNode')).length > 0
+  let mapped = _.map(list, node => {
+    return getParents(node)
+  })
 
-  if (hasParents) {
-    let mapped = _.map(list, (node) => {
-      return getParents(node)
-    })
-
-    return _.flattenDeep(mapped)
-  }
-
-  return list
+  let flat = _.flattenDeep(mapped)
+  return flat
 }
 
 export function getToggledTree (originalTree = [], filterTerm = undefined, matches = undefined) {
@@ -153,25 +148,33 @@ class Tree extends Component {
     filterTerm: React.PropTypes.string.isRequired
   };
 
-  componentDidMount () { // essentially being used as the init for this component
-    this.justMounted = false
+  componentDidMount () {
+    let { treeNodes, selectedTerms } = this.props
+    let flat = getFlattenedTree(treeNodes)
+
+    if (flat.length > 0) {
+      let allTerms = _.map(flat, 'name')
+      let terms = (_.isEmpty(selectedTerms)) ? allTerms : selectedTerms
+      this.selectTerms(terms)
+    }
   }
 
   componentDidUpdate (prevProps) { // select all by default happens in here
     let { includeParentNodes, selectedTerms, treeNodes } = this.props
     let flat = getFlattenedTree(treeNodes)
 
-    if (!this.justMounted) {
-      let allTerms = _.map(flat, 'name')
-      let terms = (_.isEmpty(selectedTerms)) ? allTerms : selectedTerms
-      this.selectTerms(terms)
-    } else if (prevProps.includeParentNodes !== includeParentNodes && this.justMounted) { // include parent nodes was toggled, so we manually select those extra terms {
+    if (prevProps.includeParentNodes !== includeParentNodes) { // include parent nodes was toggled, so we manually select those extra terms {
       let selectedNodes = _.filter(flat, node => _.includes(selectedTerms, node.name))
       let terms = _.map(selectedNodes, 'name')
       this.selectTerms(terms)
     }
 
-    this.justMounted = true
+    // when the tree changes, we select all terms by default
+    if (prevProps.treeNodes.length !== this.props.treeNodes.length) {
+      let allTerms = _.map(flat, 'name')
+      let terms = (_.isEmpty(selectedTerms)) ? allTerms : selectedTerms
+      this.selectTerms(terms)
+    }
   }
 
   shouldComponentUpdate (nextProps) {
@@ -202,8 +205,6 @@ class Tree extends Component {
     let selectedNodes = _.filter(flat, node => _.includes(selectedTerms, node.name))
     let parents = _.map(getParentsForList(selectedNodes), 'name')
     let terms = (includeParentNodes) ? _.union(parents, selectedTerms) : _.without(selectedTerms, ...parents)
-
-    console.log('selectedTerms', [selectedTerms.length, terms.length])
 
     onSelectionsChange(_.uniq(terms))
   }

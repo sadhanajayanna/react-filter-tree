@@ -12,16 +12,19 @@ class FilterTree extends Component {
     filterTerm: React.PropTypes.string.isRequired
   };
 
+  componentDidMount () {
+    this.originalTree = this.props.treeNodes
+  }
+
   componentWillReceiveProps (nextProps) {
     if (!treesAreEqual(this.props.treeNodes, nextProps.treeNodes)) {
-      this.originalTree = _.clone(nextProps.treeNodes)
+      this.originalTree = _.clone(this.props.treeNodes)
     }
   }
 
   handleTypeaheadChange (event) {
     let filterTerm = event.currentTarget.value
     let toggled = getToggledTree(this.originalTree, filterTerm)
-
     this.props.onTypeaheadChange(toggled, filterTerm)
   }
 

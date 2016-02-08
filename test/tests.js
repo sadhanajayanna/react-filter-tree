@@ -142,4 +142,20 @@ describe('tree utilities', function () {
     let visible = _.filter(flatToggled, node => node.visible)
     expect(visible.length).to.equal(18)
   })
+
+  it('gets only parent nodes for a given list of nodes', function () {
+    let deepParent = tree[0].children[1].children[1].children[0]
+    let deepChild = deepParent.children[0] // Eye intraocular melanoma
+    let expectedParents = [
+      'Eye carcinoma',
+      'Eye neoplasm',
+      'Solid tumor',
+      'all'
+    ]
+
+    let parents = _.map(getParentsForList([deepChild]), 'name')
+
+    expect(expectedParents.length).to.equal(parents.length)
+    expect(_.without(parents, ...expectedParents).length).to.equal(0)
+  })
 })
