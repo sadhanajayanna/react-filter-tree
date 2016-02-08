@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import Tree, { getToggledTree, treesAreEqual } from './Tree'
+import './styles.scss'
 
 class FilterTree extends Component {
   static propTypes = {
