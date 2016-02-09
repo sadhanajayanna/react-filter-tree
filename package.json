@@ -2,7 +2,7 @@
   "name": "react-filter-tree",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/react-filter-tree.js",
   "scripts": {
     "start": "webpack --progress --colors --watch",
     "test": "mocha --compilers js:babel-register test/"

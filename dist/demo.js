@@ -72,8 +72,6 @@
 	
 	var mockTree = (0, _Tree.decorateTree)(_mockDiseaseTree.diseaseTree.tree); // decorating the tree is key
 	
-	console.log('demo');
-	
 	var App = function (_Component) {
 	  _inherits(App, _Component);
 	
