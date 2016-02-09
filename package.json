@@ -1,8 +1,8 @@
 {
   "name": "react-filter-tree",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "",
-  "main": "lib/react-filter-tree.js",
+  "main": "lib/FilterTree.js",
   "scripts": {
     "start": "webpack --progress --colors --watch",
     "build": "babel src --out-dir lib && webpack",
