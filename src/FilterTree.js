@@ -205,7 +205,7 @@ class Tree extends Component {
     let selectedNodes = _.filter(flat, node => _.includes(selectedTerms, node.name))
     let parents = _.map(getParentsForList(selectedNodes), 'name')
     let terms = (includeParentNodes) ? _.union(parents, selectedTerms) : _.without(selectedTerms, ...parents)
-
+    
     onSelectionsChange(_.uniq(terms))
   }
 
@@ -384,12 +384,12 @@ class FilterTree extends Component {
   };
 
   componentDidMount () {
-    this.originalTree = this.props.treeNodes
+    this.originalTree = decorateTree(this.props.treeNodes)
   }
 
   componentWillReceiveProps (nextProps) {
-    if (!treesAreEqual(this.props.treeNodes, nextProps.treeNodes)) {
-      this.originalTree = _.clone(this.props.treeNodes)
+    if (!treesAreEqual(this.props.treeNodes, nextProps.treeNodes) && !_.isEmpty(nextProps.treeNodes)) {
+      this.originalTree = decorateTree(_.clone(nextProps.treeNodes))
     }
   }
 

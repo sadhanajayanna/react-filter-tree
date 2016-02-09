@@ -18,12 +18,10 @@ class App extends Component {
   }
 
   onSelectionsChange (terms) {
-    console.log('onSelectionsChange', terms)
     this.setState({ terms })
   }
 
   onTypeaheadChange (tree, filterTerm) {
-    console.log('onTypeaheadChange', [filterTerm, tree])
     this.setState({ tree, filterTerm })
   }
 
