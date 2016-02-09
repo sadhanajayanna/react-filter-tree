@@ -3,12 +3,14 @@ var path = require('path')
 module.exports = {
   devtool: 'source-map',
   entry: {
-    "react-filter-tree": ['./src/FilterTree.js'],
-    "demo": './src/demo.js'
+    "react-filter-tree": ['./src/FilterTree.js']
   },
   output: {
     path: path.join(__dirname, './lib/'),
-    filename: '[name].js'
+    filename: '[name].js',
+    sourceMapFilename: '[name].map',
+    library: 'FilterTree',
+    libraryTarget: 'umd',
   },
   module: {
     loaders: [{
@@ -30,5 +32,21 @@ module.exports = {
         path.resolve(__dirname, 'src/')
       ]
     }]
-  }
+  },
+  externals: {
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom',
+    },
+    'lodash': 'lodash',
+    '_': 'lodash'
+  },
 }

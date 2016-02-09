@@ -1,10 +1,11 @@
 {
   "name": "react-filter-tree",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "lib/react-filter-tree.js",
+  "main": "lib/FilterTree.js",
   "scripts": {
     "start": "webpack --progress --colors --watch",
+    "prepublish": "babel src --out-dir lib && webpack",
     "test": "mocha --compilers js:babel-register test/"
   },
   "author": "https://github.com/brandonaaskov",
