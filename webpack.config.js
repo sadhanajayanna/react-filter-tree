@@ -3,7 +3,7 @@ var path = require('path')
 module.exports = {
   devtool: 'source-map',
   entry: {
-    "react-filter-tree": ['./src/FilterTree.js']
+    "react-filter-tree": ['./lib/FilterTree.js']
   },
   output: {
     path: path.join(__dirname, './lib/'),
