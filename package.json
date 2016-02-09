@@ -9,6 +9,7 @@
     "test": "mocha --compilers js:babel-register test/"
   },
   "author": "https://github.com/brandonaaskov",
+  "access": "public",
   "license": "WTFPL",
   "dependencies": {
     "lodash": "^4.2.1",
