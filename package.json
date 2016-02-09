@@ -2,13 +2,13 @@
   "name": "react-filter-tree",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/react-filter-tree.js",
+  "main": "lib/react-filter-tree.js",
   "scripts": {
     "start": "webpack --progress --colors --watch",
     "test": "mocha --compilers js:babel-register test/"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "https://github.com/brandonaaskov",
+  "license": "WTFPL",
   "dependencies": {
     "lodash": "^4.2.1",
     "react": "^0.14.7",

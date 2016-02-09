@@ -3,11 +3,11 @@ var path = require('path')
 module.exports = {
   devtool: 'source-map',
   entry: {
-    "react-filter-tree": ['./src/FilterTree.js'], // read the first response for why i hate webpack (nothing is obvious!)
-    "demo": './demo.js'
+    "react-filter-tree": ['./src/FilterTree.js'],
+    "demo": './src/demo.js'
   },
   output: {
-    path: path.join(__dirname, './dist/'),
+    path: path.join(__dirname, './lib/'),
     filename: '[name].js'
   },
   module: {
