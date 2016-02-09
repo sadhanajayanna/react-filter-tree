@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import FilterTree from './FilterTree'
-import { diseaseTree } from '../test/mock-disease-tree.js'
-import { decorateTree } from './Tree'
+import FilterTree from './src/FilterTree'
+import { diseaseTree } from './test/mock-disease-tree.js'
+import { decorateTree } from './src/Tree'
+import { render } from 'react-dom'
 
 let mockTree = decorateTree(diseaseTree.tree) // decorating the tree is key
 
@@ -35,4 +36,6 @@ class App extends Component {
   }
 }
 
-export default App
+render((
+  (<App />)
+), document.getElementById('container'))
