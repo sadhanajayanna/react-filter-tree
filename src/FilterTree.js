@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import TreeView from 'react-treeview'
+import './styles.scss'
 
 function flattenTree (parentNode) {
   let list = (_.has(parentNode, 'children') && parentNode.children.length > 0) ? parentNode.children : [parentNode]
