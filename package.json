@@ -5,7 +5,7 @@
   "main": "lib/FilterTree.js",
   "scripts": {
     "start": "webpack --progress --colors --watch",
-    "postinstall": "babel ./src/FilterTree.js --out-dir ./lib/ && webpack --config webpack.config.js --progress",
+    "postinstall": "webpack --config webpack.config.js --progress",
     "build-demos": "webpack --config webpack.demos.config.js",
     "test": "mocha --compilers js:babel-register test/"
   },

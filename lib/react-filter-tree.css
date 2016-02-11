@@ -1,0 +1,47 @@
+@import url(../node_modules/react-treeview/react-treeview.css);
+.filter-tree {
+  position: relative; }
+  .filter-tree .input-search-container {
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAAXNSR0IArs4c6QAAAt9JREFUOBGtVF1IU2EYft8z5+Z06szKYWgRKWFEkTLUBKW6sMjMmKMbKSIqogtvuva2vPEiDAnKrqIZGf0X1ZZZbVgSgWVpqVAu6UcQzZrtvL3fOZ519sW8sA5s3/f8vM959/0MQXp8jyNlZMEDTG8BoHweZwHwLSB1z0SjZ25UFU5KJQkQDVQdGLEvS7O3A+I+JuO8oYuRgL4CqMf8nvwLZt481wprbw7ZnDkZ9xBxsyYS/eCxjwifcTR7qIq1TUahCnS8y+NuNbB51AJ94Ug7N3VECETUS4hNXZ68EbORPV5usYN/gYtEsyrs8pfnXTN7xBz39EZKUqz4kucKhwX8tzu2QkuLKhsF9oY/reIO+vmTzW8em/o2XXxr+5qfZq9i0TdAhM1GY3MHk4WJItE1qdSsBSAWOnPSveYwMVe4r226AR5eqSx4Jxtk3FXu7uTNeSN4Xtc6WVeQsEAjVeyXxaSYMKhphMWyR+HzZdFIpAXPV0IhwXeBuVNnAs9A4R37oJEI62QxGUYF1s9ro7JH4dfc10msrwu9Xy4bZFzXO+jkJkrn+VeyrmAMOgXJRyHLjo7TskHGadasE8Kr1RCdlXXlYqW7j9fCrxkAdjeGIqfENZSNjLExPN5MgIc1jWBianJmQPbxywDqAyPZNoc9zDVFuoGE8WQ0GgulKimpYKEyxk18Tqp13fim68MvPjY8P1Q6ZzBaoAANPaNuq812lUON9TE8C49ElydmB33BmppfwqgfGZ68Ptc2bS/b2+nKy5jkjSrhQ5uZmERfSMU2BIpxpyvjGuLa9JTcooEVzm4IBineYdygT9D3dHwjKLiaVC4HGhbrJe6tNzCQoTiW3GFbhbmG9+G83+PenyzQ7P1rXhsaynQi/90BirX98xC1LipQJOx4NOZKT7U94IANRiJ3+XnRgSJkZ2A81+EQ9xpLOCyqqlD/T4Ei1NsTWYpWOKqSevdSRf4Twf3X5zeN6PVdaG5cygAAAABJRU5ErkJggg==");
+    background-color: rgba(63, 76, 87, 0.5);
+    background-repeat: no-repeat;
+    background-size: 10px 11px;
+    background-position: 5px 10px; }
+  .filter-tree input[type='search'] {
+    width: 300px;
+    font-size: 14px;
+    color: #F1F2F5;
+    line-height: 14px;
+    padding: 8px 8px 8px 18px;
+    background-color: transparent;
+    border: none; }
+  .filter-tree .deselect-all {
+    display: block;
+    padding: 7px 0 2px 0; }
+  .filter-tree .tree .tree-view {
+    overflow: hidden; }
+    .filter-tree .tree .tree-view .tree-view_item .tree-view_arrow {
+      margin-left: 2px;
+      display: inline-block;
+      color: black;
+      font-size: 18px; }
+    .filter-tree .tree .tree-view .tree-view_item .tree-view-children {
+      margin-left: 10px; }
+  .filter-tree .tree .label-checkbox {
+    display: inline-block;
+    width: 90%; }
+  .filter-tree .tree .label-container {
+    display: inline-block;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    top: 5px;
+    left: 2px; }
+    .filter-tree .tree .label-container .label {
+      white-space: nowrap; }
+  .filter-tree .tree .leaf-node {
+    margin-left: 17px; }
