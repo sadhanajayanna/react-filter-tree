@@ -1,13 +1,11 @@
 {
   "name": "react-filter-tree",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "lib/FilterTree.js",
   "scripts": {
     "start": "webpack --progress --colors --watch",
-    "build": "babel src --out-dir lib && webpack",
-    "prepublish": "npm run build",
-    "postinstall": "npm run build",
+    "postinstall": "babel ./src/FilterTree.js --out-dir ./lib/ && webpack --config webpack.config.js --progress",
     "build-demos": "webpack --config webpack.demos.config.js",
     "test": "mocha --compilers js:babel-register test/"
   },
@@ -21,15 +19,16 @@
     "react-treeview": "^0.4.3"
   },
   "devDependencies": {
-    "babel-core": "^6.4.5",
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.5.1",
     "babel-eslint": "^4.1.8",
     "babel-loader": "^6.2.2",
     "babel-plugin-react-transform": "^2.0.0",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-react": "^6.3.13",
-    "babel-preset-stage-0": "^6.3.13",
-    "babel-preset-stage-2": "^6.3.13",
-    "babel-register": "^6.4.3",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "babel-register": "^6.5.1",
     "chai": "^3.5.0",
     "css-loader": "^0.23.1",
     "eslint-plugin-react": "^3.16.1",
