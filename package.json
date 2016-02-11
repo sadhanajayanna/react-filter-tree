@@ -1,12 +1,12 @@
 {
   "name": "react-filter-tree",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "",
   "main": "lib/FilterTree.js",
   "scripts": {
-    "start": "webpack --progress --colors --watch",
+    "build": "webpack --progress --colors --watch",
     "babel": "babel src --out-dir lib",
-    "postinstall": "webpack --config webpack.config.js --progress",
+    "postinstall-that-doesnt-work": "webpack --config webpack.config.js --progress",
     "build-demos": "webpack --config webpack.demos.config.js",
     "test": "mocha --compilers js:babel-register test/"
   },
