@@ -1,6 +1,6 @@
 {
   "name": "react-filter-tree",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "",
   "main": "lib/FilterTree.js",
   "scripts": {
