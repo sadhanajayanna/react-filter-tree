@@ -1,13 +1,13 @@
 {
   "name": "react-filter-tree",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "lib/FilterTree.js",
   "scripts": {
-    "start": "webpack --progress --colors --watch",
+    "start": "node ./node_modules/webpack/bin/webpack.js --progress --colors --watch",
     "babel": "babel src --out-dir lib",
-    "postinstall": "webpack --config webpack.config.js --progress",
-    "build-demos": "webpack --config webpack.demos.config.js",
+    "postinstall": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.js --progress",
+    "build-demos": "node ./node_modules/webpack/bin/webpack.js --config webpack.demos.config.js",
     "test": "mocha --compilers js:babel-register test/"
   },
   "author": "https://github.com/brandonaaskov",
