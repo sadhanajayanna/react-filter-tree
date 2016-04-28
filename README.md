@@ -5,7 +5,7 @@
 ```
 nvm install
 npm install
-npm start
+npm run build-demos
 python -m SimpleHTTPServer
 ```
 

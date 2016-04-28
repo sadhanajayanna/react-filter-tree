@@ -6,7 +6,7 @@ module.exports = {
     "demo": ['./demos/demo.js']
   },
   output: {
-    path: path.join(__dirname, './lib/'),
+    path: path.join(__dirname, './dist/'),
     filename: '[name].js',
     sourceMapFilename: '[name].map'
   },
@@ -15,20 +15,6 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel',
       exclude: /node_modules/
-    },
-    {
-      test: /\.css$/,
-      loaders: ['style', 'css', 'postcss-loader'],
-      include: [
-        path.resolve(__dirname, 'src/')
-      ]
-    },
-    {
-      test: /\.scss$/,
-      loaders: ['style', 'css?sourceMap', 'sass?sourceMap'],
-      include: [
-        path.resolve(__dirname, 'src/')
-      ]
     }]
   }
 }
