@@ -63,21 +63,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _createClass = function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	  };
-	}();
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	exports.getParents = getParents;
 	exports.treesAreEqual = treesAreEqual;
@@ -100,37 +90,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _reactTreeview2 = _interopRequireDefault(_reactTreeview);
 	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
-	}
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	function _possibleConstructorReturn(self, call) {
-	  if (!self) {
-	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-	}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) {
-	  if (typeof superClass !== "function" && superClass !== null) {
-	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	function _toConsumableArray(arr) {
-	  if (Array.isArray(arr)) {
-	    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
-	      arr2[i] = arr[i];
-	    }return arr2;
-	  } else {
-	    return Array.from(arr);
-	  }
-	}
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	function flattenTree(parentNode) {
 	  var list = _lodash2.default.has(parentNode, 'children') && parentNode.children.length > 0 ? parentNode.children : [parentNode];
@@ -373,6 +341,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var includeParentNodes = _props3.includeParentNodes;
 	      var onSelectionsChange = _props3.onSelectionsChange;
 	
+	
 	      var flat = getFlattenedTree(treeNodes);
 	      var selectedNodes = _lodash2.default.filter(flat, function (node) {
 	        return _lodash2.default.includes(selectedTerms, node.name);
@@ -386,6 +355,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'handleLeafClick',
 	    value: function handleLeafClick(node) {
 	      var selectedTerms = this.props.selectedTerms;
+	
 	
 	      var unchecking = _lodash2.default.includes(selectedTerms, node.name);
 	      var terms = unchecking ? _lodash2.default.difference(selectedTerms, [node.name]) : _lodash2.default.union(selectedTerms, [node.name]);
@@ -421,6 +391,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'areChildrenSelected',
 	    value: function areChildrenSelected(node) {
 	      var selectedTerms = this.props.selectedTerms;
+	
 	
 	      var children = _lodash2.default.map(getChildrenNodes(node, true), 'name');
 	      var childrenSelected = _lodash2.default.intersection(children, selectedTerms);
@@ -480,15 +451,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      var children = getChildrenNodes(node);
 	
-	      return _react2.default.createElement('div', { className: css,
-	        onClick: this.handleParentClick.bind(this, node) }, this.getParentCheckbox(node), _react2.default.createElement('div', { className: 'label-container' }, _react2.default.createElement('span', { className: 'label' }, node.name, ' (', children.length, ')')));
+	      return _react2.default.createElement(
+	        'div',
+	        { className: css,
+	          onClick: this.handleParentClick.bind(this, node) },
+	        this.getParentCheckbox(node),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'label-container' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'label' },
+	            node.name,
+	            ' (',
+	            children.length,
+	            ')'
+	          )
+	        )
+	      );
 	    }
 	  }, {
 	    key: 'createLeafNode',
 	    value: function createLeafNode(node) {
-	      return _react2.default.createElement('div', { className: 'leaf-node',
-	        key: node.id,
-	        onClick: this.handleLeafClick.bind(this, node) }, this.getLeafCheckbox(node), _react2.default.createElement('div', { className: 'label-container' }, _react2.default.createElement('span', { className: 'label' }, node.name)));
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'leaf-node',
+	          key: node.id,
+	          onClick: this.handleLeafClick.bind(this, node) },
+	        this.getLeafCheckbox(node),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'label-container' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'label' },
+	            node.name
+	          )
+	        )
+	      );
 	    }
 	  }, {
 	    key: 'createTree',
@@ -503,7 +503,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var css = node.visible ? 'show' : 'hide';
 	
 	        if (_lodash2.default.isEmpty(node.children)) {
-	          return _react2.default.createElement('div', { className: css, key: id, ref: node.ref }, _this2.createLeafNode(node));
+	          return _react2.default.createElement(
+	            'div',
+	            { className: css, key: id, ref: node.ref },
+	            _this2.createLeafNode(node)
+	          );
 	        } else {
 	          var _props4 = _this2.props;
 	          var treeNodes = _props4.treeNodes;
@@ -530,7 +534,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	            props.collapsed = !treeExpanded;
 	          }
 	
-	          return _react2.default.createElement('div', { className: css, key: id }, _react2.default.createElement(_reactTreeview2.default, props, _this2.createTree(node.children)));
+	          return _react2.default.createElement(
+	            'div',
+	            { className: css, key: id },
+	            _react2.default.createElement(
+	              _reactTreeview2.default,
+	              props,
+	              _this2.createTree(node.children)
+	            )
+	          );
 	        }
 	      }, this);
 	
@@ -543,7 +555,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var treeNodes = _props5.treeNodes;
 	      var selectedTerms = _props5.selectedTerms;
 	
-	      return _react2.default.createElement('div', { className: 'tree' }, _react2.default.createElement('a', { className: 'deselect-all', onClick: this.handleDeselectAll.bind(this) }, 'Deselect All (', selectedTerms.length, ')'), this.createTree(treeNodes));
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'tree' },
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'deselect-all', onClick: this.handleDeselectAll.bind(this) },
+	          'Deselect All (',
+	          selectedTerms.length,
+	          ')'
+	        ),
+	        this.createTree(treeNodes)
+	      );
 	    }
 	  }]);
 	
@@ -596,6 +620,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var includeParentNodes = _props6.includeParentNodes;
 	      var filterTerm = _props6.filterTerm;
 	
+	
 	      var debounced = _lodash2.default.debounce(this.handleTypeaheadChange.bind(this), 250);
 	
 	      var typeAheadHandler = function typeAheadHandler(event) {
@@ -604,11 +629,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        debounced(_lodash2.default.clone(event));
 	      };
 	
-	      return _react2.default.createElement('div', { className: 'filter-tree' }, _react2.default.createElement('div', { className: 'input-search-container' }, _react2.default.createElement('input', { type: 'search', onChange: typeAheadHandler.bind(this) })), _react2.default.createElement(Tree, { treeNodes: treeNodes,
-	        onSelectionsChange: onSelectionsChange,
-	        selectedTerms: selectedTerms,
-	        includeParentNodes: includeParentNodes,
-	        filterTerm: filterTerm }));
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'filter-tree' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'input-search-container' },
+	          _react2.default.createElement('input', { type: 'search', onChange: typeAheadHandler.bind(this) })
+	        ),
+	        _react2.default.createElement(Tree, { treeNodes: treeNodes,
+	          onSelectionsChange: onSelectionsChange,
+	          selectedTerms: selectedTerms,
+	          includeParentNodes: includeParentNodes,
+	          filterTerm: filterTerm })
+	      );
 	    }
 	  }]);
 	
