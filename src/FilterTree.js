@@ -53,7 +53,7 @@ export function getVisibleMatches (tree, text) {
   if (_.isEmpty(text)) return []
 
   let flat = getFlattenedTree(tree)
-  let matches = _.filter(flat, node => node.name.toLowerCase().indexOf(text.toLowerCase()) > -1)
+  let matches = _.filter(flat, node => _.includes(text, node.name)) // node.name.toLowerCase().indexOf(text.toLowerCase()) > -1)
   let parents = getParentsForList(matches)
   let visible = _.union(matches, parents)
   return uniq(visible)
@@ -83,7 +83,7 @@ export function getToggledTree (originalTree = [], filterTerm = undefined, match
       node.visible = true
     }
 
-    if (!_.isEmpty(node.children)) {
+    if (node && !_.isEmpty(node.children)) {
       node.children = getToggledTree(node.children, filterTerm, matches)
     }
 
@@ -205,7 +205,7 @@ class Tree extends Component {
     let selectedNodes = _.filter(flat, node => _.includes(selectedTerms, node.name))
     let parents = _.map(getParentsForList(selectedNodes), 'name')
     let terms = (includeParentNodes) ? _.union(parents, selectedTerms) : _.without(selectedTerms, ...parents)
-    
+
     onSelectionsChange(_.uniq(terms))
   }
 
@@ -266,7 +266,6 @@ class Tree extends Component {
 
     let props = {
       key: node.id,
-      ref: node.name,
       src: image
     }
 
@@ -283,7 +282,6 @@ class Tree extends Component {
 
     let props = {
       key: node.id,
-      ref: node.name,
       src: image
     }
 
@@ -323,7 +321,7 @@ class Tree extends Component {
       let css = (node.visible) ? 'show' : 'hide'
 
       if (_.isEmpty(node.children)) {
-        return <div className={css} key={id} ref={node.ref}>
+        return <div className={css} key={id}>
                 {this.createLeafNode(node)}
               </div>
       } else {
@@ -338,7 +336,6 @@ class Tree extends Component {
         if (node.name === 'all') treeExpanded = true // override for "all"
 
         let props = {
-          ref: node.ref,
           nodeLabel: this.createParentNodeLabel(node)
         }
 
@@ -416,16 +413,20 @@ class FilterTree extends Component {
       debounced(_.clone(event))
     }
 
+    let props = {
+      treeNodes: treeNodes,
+      onSelectionsChange: onSelectionsChange,
+      selectedTerms: selectedTerms,
+      includeParentNodes: includeParentNodes,
+      filterTerm: filterTerm
+    }
+
     return (
       <div className="filter-tree">
         <div className="input-search-container">
           <input type="search" onChange={typeAheadHandler.bind(this)} />
         </div>
-        <Tree treeNodes={treeNodes}
-              onSelectionsChange={onSelectionsChange}
-              selectedTerms={selectedTerms}
-              includeParentNodes={includeParentNodes}
-              filterTerm={filterTerm} />
+        <Tree {...props} />
       </div>
     )
   }

@@ -2,13 +2,15 @@ import _ from 'lodash'
 import { expect } from 'chai'
 import { diseaseTree } from './mock-disease-tree'
 import {
-    getFlattenedTree,
-    decorateTree,
-    getToggledTree,
-    getChildrenNodes,
-    treesAreEqual,
-    getParentsForList,
-    getVisibleMatches } from '../src/Tree'
+  getFlattenedTree,
+  decorateTree,
+  getToggledTree,
+  getChildrenNodes,
+  treesAreEqual,
+  getParentsForList,
+  getVisibleMatches,
+  getSubTree
+} from '../src/FilterTree'
 
 let tree, flat
 let oneMatch, manyMatches = []

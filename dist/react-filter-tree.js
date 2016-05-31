@@ -157,8 +157,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var flat = getFlattenedTree(tree);
 	  var matches = _lodash2.default.filter(flat, function (node) {
-	    return node.name.toLowerCase().indexOf(text.toLowerCase()) > -1;
-	  });
+	    return _lodash2.default.includes(text, node.name);
+	  }); // node.name.toLowerCase().indexOf(text.toLowerCase()) > -1)
 	  var parents = getParentsForList(matches);
 	  var visible = _lodash2.default.union(matches, parents);
 	  return uniq(visible);
@@ -195,7 +195,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      node.visible = true;
 	    }
 	
-	    if (!_lodash2.default.isEmpty(node.children)) {
+	    if (node && !_lodash2.default.isEmpty(node.children)) {
 	      node.children = getToggledTree(node.children, filterTerm, matches);
 	    }
 	
@@ -418,7 +418,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      var props = {
 	        key: node.id,
-	        ref: node.name,
 	        src: image
 	      };
 	
@@ -437,7 +436,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      var props = {
 	        key: node.id,
-	        ref: node.name,
 	        src: image
 	      };
 	
@@ -505,7 +503,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (_lodash2.default.isEmpty(node.children)) {
 	          return _react2.default.createElement(
 	            'div',
-	            { className: css, key: id, ref: node.ref },
+	            { className: css, key: id },
 	            _this2.createLeafNode(node)
 	          );
 	        } else {
@@ -523,7 +521,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          if (node.name === 'all') treeExpanded = true; // override for "all"
 	
 	          var props = {
-	            ref: node.ref,
 	            nodeLabel: _this2.createParentNodeLabel(node)
 	          };
 	
@@ -629,6 +626,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        debounced(_lodash2.default.clone(event));
 	      };
 	
+	      var props = {
+	        treeNodes: treeNodes,
+	        onSelectionsChange: onSelectionsChange,
+	        selectedTerms: selectedTerms,
+	        includeParentNodes: includeParentNodes,
+	        filterTerm: filterTerm
+	      };
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'filter-tree' },
@@ -637,11 +642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          { className: 'input-search-container' },
 	          _react2.default.createElement('input', { type: 'search', onChange: typeAheadHandler.bind(this) })
 	        ),
-	        _react2.default.createElement(Tree, { treeNodes: treeNodes,
-	          onSelectionsChange: onSelectionsChange,
-	          selectedTerms: selectedTerms,
-	          includeParentNodes: includeParentNodes,
-	          filterTerm: filterTerm })
+	        _react2.default.createElement(Tree, props)
 	      );
 	    }
 	  }]);
