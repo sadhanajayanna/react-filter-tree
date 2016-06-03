@@ -29,6 +29,7 @@ class App extends Component {
               onTypeaheadChange={this.onTypeaheadChange.bind(this)}
               includeParentNodes={this.state.includeParentNodes}
               selectedTerms={this.state.terms}
+              hideDeselectAll={false}
               filterTerm={this.state.filterTerm} />
   }
 }

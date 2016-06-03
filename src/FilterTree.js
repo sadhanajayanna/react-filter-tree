@@ -144,6 +144,7 @@ class Tree extends Component {
     treeNodes: React.PropTypes.array.isRequired,
     onSelectionsChange: React.PropTypes.func.isRequired,
     selectedTerms: React.PropTypes.array.isRequired,
+    hideDeselectAll: React.PropTypes.bool,
     includeParentNodes: React.PropTypes.bool.isRequired,
     filterTerm: React.PropTypes.string.isRequired
   };
@@ -362,14 +363,21 @@ class Tree extends Component {
     return tree
   }
 
+  getDeselectAll () {
+    let { hideDeselectAll, selectedTerms } = this.props
+
+    if (hideDeselectAll) return
+
+    return (<a className="deselect-all" onClick={this.handleDeselectAll.bind(this)}>
+      Deselect All ({selectedTerms.length})
+    </a>)
+  }
+
   render () {
-    let { treeNodes, selectedTerms } = this.props
+    let { treeNodes } = this.props
 
     return <div className="tree">
-      <a className="deselect-all" onClick={this.handleDeselectAll.bind(this)}>
-        Deselect All ({selectedTerms.length})
-      </a>
-
+      {this.getDeselectAll()}
       {this.createTree(treeNodes)}
     </div>
   }
@@ -381,6 +389,7 @@ class FilterTree extends Component {
     onSelectionsChange: React.PropTypes.func.isRequired,
     onTypeaheadChange: React.PropTypes.func.isRequired,
     selectedTerms: React.PropTypes.array.isRequired,
+    hideDeselectAll: React.PropTypes.bool,
     includeParentNodes: React.PropTypes.bool.isRequired,
     filterTerm: React.PropTypes.string.isRequired
   };
@@ -406,6 +415,7 @@ class FilterTree extends Component {
       treeNodes,
       onSelectionsChange,
       selectedTerms,
+      hideDeselectAll,
       includeParentNodes,
       filterTerm
     } = this.props
@@ -418,20 +428,15 @@ class FilterTree extends Component {
       debounced(_.clone(event))
     }
 
-    let props = {
-      treeNodes: treeNodes,
-      onSelectionsChange: onSelectionsChange,
-      selectedTerms: selectedTerms,
-      includeParentNodes: includeParentNodes,
-      filterTerm: filterTerm
-    }
-
     return (
       <div className="filter-tree">
         <div className="input-search-container">
           <input type="search" onChange={typeAheadHandler.bind(this)} />
         </div>
-        <Tree {...props} />
+
+        <span className="separator"></span>
+
+        <Tree {...this.props} />
       </div>
     )
   }
