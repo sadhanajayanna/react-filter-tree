@@ -21,6 +21,8 @@
     padding: 7px 0 2px 0; }
   .filter-tree .tree .tree-view {
     overflow: hidden; }
+    .filter-tree .tree .tree-view .hide {
+      display: none; }
     .filter-tree .tree .tree-view .tree-view_item .tree-view_arrow {
       margin-left: 2px;
       display: inline-block;

@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import FilterTree, { decorateTree } from '../src/FilterTree'
-import { diseaseTree } from '../test/mock-disease-tree.js'
+import mockTree from '../test/mock-tree.js'
 import { render } from 'react-dom'
 
-let mockTree = decorateTree(diseaseTree.tree) // decorating the tree is key
+let tree = decorateTree(mockTree) // decorating the tree is key
 
 class App extends Component {
-  constructor (...args) {
-    super(...[args])
-
+  componentWillMount () {
     this.state = {
-      tree: mockTree,
+      tree,
       terms: [],
       includeParentNodes: false,
       filterTerm: ''
@@ -26,7 +24,7 @@ class App extends Component {
   }
 
   render () {
-    return <FilterTree treeNodes={_.clone(this.state.tree)}
+    return <FilterTree treeNodes={_.cloneDeep(this.state.tree)}
               onSelectionsChange={this.onSelectionsChange.bind(this)}
               onTypeaheadChange={this.onTypeaheadChange.bind(this)}
               includeParentNodes={this.state.includeParentNodes}

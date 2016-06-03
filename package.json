@@ -8,7 +8,7 @@
     "build-demos": "node scripts/build.js --demos",
     "test": "mocha --compilers js:babel-register test/"
   },
-  "author": "https://github.com/brandonaaskov",
+  "author": "Brandon Aaskov",
   "access": "public",
   "license": "WTFPL",
   "dependencies": {

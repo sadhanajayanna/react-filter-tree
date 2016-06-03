@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { expect } from 'chai'
-import { diseaseTree } from './mock-disease-tree'
+import mockTree from './mock-tree'
 import {
   getFlattenedTree,
   decorateTree,
@@ -14,22 +14,16 @@ import {
 
 let tree, flat
 let oneMatch, manyMatches = []
-let totalNodes = 494
-const BONE = 'bone'
-const EYE_INTRAOCULAR_MELANOMA = 'eye intraocular melanoma'
+let totalNodes = 21
+const ONE_MATCH = '13'
+const MANY_MATCHES = 'ol'
 
 describe('tree utilities', function () {
   beforeEach(function () {
-    tree = decorateTree(diseaseTree.tree)
+    tree = decorateTree(mockTree)
     flat = getFlattenedTree(tree)
-    oneMatch = getVisibleMatches(tree, EYE_INTRAOCULAR_MELANOMA)
-    manyMatches = getVisibleMatches(tree, BONE)
-  })
-
-  it('should have a parent node different than itself', function () {
-    let randomSample = flat[_.random(1, flat.length)]
-    let parent = randomSample.parentNode
-    expect(parent.id).not.to.equal(randomSample.id)
+    oneMatch = getVisibleMatches(tree, ONE_MATCH)
+    manyMatches = getVisibleMatches(tree, MANY_MATCHES)
   })
 
   it('flattens the tree with a flag to getNodes', function () {
@@ -48,7 +42,7 @@ describe('tree utilities', function () {
   })
 
   it('should return the same tree shape for getToggledTree', function () {
-    let toggledTree = getToggledTree(tree, EYE_INTRAOCULAR_MELANOMA)
+    let toggledTree = getToggledTree(tree, MANY_MATCHES)
     let flatToggled = getFlattenedTree(toggledTree)
 
     expect(tree.length).to.equal(toggledTree.length)
@@ -58,7 +52,7 @@ describe('tree utilities', function () {
   })
 
   it('getNodes should give me the exact same tree structure back', function () {
-    let toggledTree = getToggledTree(tree, EYE_INTRAOCULAR_MELANOMA)
+    let toggledTree = getToggledTree(tree, MANY_MATCHES)
     expect(treesAreEqual(toggledTree, tree)).to.equal(true)
 
     let amountToChop = 4
@@ -71,18 +65,18 @@ describe('tree utilities', function () {
   })
 
   it('maintains the tree structure during decoration', function () {
-    expect(tree.length).to.equal(diseaseTree.tree.length)
-    expect(flat.length).to.equal(getFlattenedTree(diseaseTree.tree).length)
+    expect(tree.length).to.equal(mockTree.length)
+    expect(flat.length).to.equal(getFlattenedTree(mockTree).length)
   })
 
   it('gets a list of matches for a given string', function () {
-    const parentNodes = 5
+    const parentNodes = 4
     expect(oneMatch.length).to.equal(parentNodes)
-    expect(manyMatches.length).to.equal(39) // derived from hand-counting
+    expect(manyMatches.length).to.equal(8) // derived from hand-counting (inclues parent nodes)
   })
 
   it('maintains the same tree structure when given matches', function () {
-    let toggledTree = getToggledTree(tree, EYE_INTRAOCULAR_MELANOMA)
+    let toggledTree = getToggledTree(tree, MANY_MATCHES)
     expect(treesAreEqual(tree, toggledTree)).to.equal(true)
   })
 
@@ -92,20 +86,20 @@ describe('tree utilities', function () {
   })
 
   it('visible nodes list includes matches and their parents', function () {
-    let parents = getParentsForList(manyMatches)
-    let visible = getVisibleMatches(tree, BONE)
-    let unique = _.uniq(_.union(parents, manyMatches), node => node.id)
-    expect(unique.length).to.equal(visible.length)
+    let matchesNames = _.map(manyMatches, 'name')
+    let parents = _.map(getParentsForList(manyMatches), 'name')
+
+    let unique = _.union(parents, matchesNames)
+    expect(unique.length).to.equal(_.uniq(matchesNames).length)
   })
 
   it('getVisibleMatches should return the same number of visible nodes in the tree', function () {
-    let toggledTree = getToggledTree(tree, 'leukemia')
-    let matches = getVisibleMatches(tree, 'leukemia')
+    let toggledTree = getToggledTree(tree, MANY_MATCHES)
     let flatToggled = getFlattenedTree(toggledTree)
     let visible = _.filter(flatToggled, node => node.visible)
 
-    expect(visible.length).to.equal(19) // derived from hand-counting
-    expect(visible.length).to.equal(matches.length)
+    expect(visible.length).to.equal(8) // derived from hand-counting
+    expect(visible.length).to.equal(manyMatches.length)
   })
 
   it('should have an empty tree for a bad term', function () {
@@ -117,16 +111,17 @@ describe('tree utilities', function () {
   })
 
   it('gets me some child nodes', function () {
-    let node = _.find(flat, { name: 'Bone marrow neoplasm'})
+    let node = _.find(flat, { name: 'military'})
     let children = getChildrenNodes(node)
     let childrenNames = _.map(children, 'name')
     let expectNames = [
-      'Bone marrow aplastic anemia',
-      'Bone marrow mastocytosis',
-      'Bone marrow myeloproliferative neoplasm (MPN)',
-      'Bone marrow multiple myeloma',
-      'Bone marrow plasmacytoma'
+      '13 Hours: The Secret Soldiers of Benghazi',
+      'The Hurt Locker',
+      'American Sniper',
+      'Lone Survivor',
+      'Zero Dark Thiry'
     ]
+
     let diff = _.difference(childrenNames, expectNames)
 
     expect(diff.length).to.equal(0)
@@ -134,24 +129,22 @@ describe('tree utilities', function () {
   })
 
   it('gets matches given a flat tree', function () {
-    let matches = getVisibleMatches(tree, 'HI')
-    expect(matches.length).to.equal(18)
+    let matches = getVisibleMatches(tree, 'ou')
+    expect(matches.length).to.equal(6) // derived from hand-counting
   })
 
   it('finds matches for genes', function () {
-    let toggled = getToggledTree(tree, 'HI')
+    let toggled = getToggledTree(tree, 'ou')
     let flatToggled = getFlattenedTree(toggled)
     let visible = _.filter(flatToggled, node => node.visible)
-    expect(visible.length).to.equal(18)
+    expect(visible.length).to.equal(6)
   })
 
   it('gets only parent nodes for a given list of nodes', function () {
-    let deepParent = tree[0].children[1].children[1].children[0]
-    let deepChild = deepParent.children[0] // Eye intraocular melanoma
+    let deepParent = tree[0].children[1]
+    let deepChild = deepParent.children[0] // Neighbors
     let expectedParents = [
-      'Eye carcinoma',
-      'Eye neoplasm',
-      'Solid tumor',
+      'comedy',
       'all'
     ]
 

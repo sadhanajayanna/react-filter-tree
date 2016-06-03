@@ -53,7 +53,7 @@ export function getVisibleMatches (tree, text) {
   if (_.isEmpty(text)) return []
 
   let flat = getFlattenedTree(tree)
-  let matches = _.filter(flat, node => _.includes(text, node.name)) // node.name.toLowerCase().indexOf(text.toLowerCase()) > -1)
+  let matches = _.filter(flat, node => node.name.toLowerCase().indexOf(text.toLowerCase()) > -1)
   let parents = getParentsForList(matches)
   let visible = _.union(matches, parents)
   return uniq(visible)
@@ -188,7 +188,12 @@ class Tree extends Component {
     visibles.next = _.filter(flat.next, node => node && node.visible)
 
     let newNodes = this.props.treeNodes.length !== nextProps.treeNodes.length
-    let newVisibles = visibles.current.length !== visibles.next.length
+
+    let currentVisibleNames = _.map(visibles.current, 'name')
+    let nextVisibleNames = _.map(visibles.next, 'name')
+
+    let newVisibles = !_.isEmpty(_.difference(currentVisibleNames, nextVisibleNames)) ||
+      !_.isEmpty(_.difference(nextVisibleNames, currentVisibleNames))
 
     let newTerms = this.props.selectedTerms.length !== nextProps.selectedTerms.length
     let leafNodesToggled = this.props.includeParentNodes !== nextProps.includeParentNodes
@@ -242,7 +247,7 @@ class Tree extends Component {
   areChildrenSelected (node) {
     let { selectedTerms } = this.props
 
-    let children = _.map(getChildrenNodes(node, true), 'name')
+    let children = _.uniq(_.map(getChildrenNodes(node, true), 'name'))
     let childrenSelected = _.intersection(children, selectedTerms)
 
     return {
@@ -290,7 +295,7 @@ class Tree extends Component {
 
   createParentNodeLabel (node) {
     let css = 'label-checkbox'
-    if (_.isEmpty(node.children)) css += ' disease leaf-node'
+    if (_.isEmpty(node.children)) css += ' leaf-node'
 
     let children = getChildrenNodes(node)
 

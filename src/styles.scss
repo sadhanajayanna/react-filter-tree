@@ -31,6 +31,10 @@
     .tree-view {
       overflow: hidden;
 
+      .hide {
+        display: none;
+      }
+
       .tree-view_item {
         .tree-view_arrow {
           margin-left: 2px;
