@@ -1,0 +1,43 @@
+{
+  "name": "react-filter-tree",
+  "version": "2.1.0",
+  "description": "",
+  "main": "dist/react-filter-tree.js",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build-demos": "node scripts/build.js --demos",
+    "test": "mocha --compilers js:babel-register test/"
+  },
+  "author": "Brandon Aaskov",
+  "access": "public",
+  "license": "WTFPL",
+  "dependencies": {
+    "lodash": "^4.2.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-treeview": "^0.4.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.5.1",
+    "babel-eslint": "^4.1.8",
+    "babel-loader": "^6.2.2",
+    "babel-plugin-react-transform": "^2.0.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "babel-register": "^6.5.1",
+    "chai": "^3.5.0",
+    "css-loader": "^0.23.1",
+    "eslint-plugin-react": "^3.16.1",
+    "lodash": "^4.11.1",
+    "mocha": "^2.4.5",
+    "node-sass": "^3.4.2",
+    "postcss-loader": "^0.8.0",
+    "sass-loader": "^3.1.2",
+    "shelljs": "^0.7.0",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.13"
+  }
+}
