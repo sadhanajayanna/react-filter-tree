@@ -155,10 +155,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	function getVisibleMatches(tree, text) {
 	  if (_lodash2.default.isEmpty(text)) return [];
 	
+	  function contains(name, terms) {
+	    var filtered = _lodash2.default.filter(terms, function (term) {
+	      return _lodash2.default.includes(name, _lodash2.default.lowerCase(term));
+	    });
+	
+	    return !_lodash2.default.isEmpty(filtered);
+	  }
+	
 	  var flat = getFlattenedTree(tree);
 	  var matches = _lodash2.default.filter(flat, function (node) {
-	    return node.name.toLowerCase().indexOf(text.toLowerCase()) > -1;
+	    var name = _lodash2.default.lowerCase(node.name);
+	
+	    if (_lodash2.default.isString(text)) {
+	      return name.indexOf(_lodash2.default.lowerCase(text)) > -1;
+	    } else if (_lodash2.default.isArray(text)) {
+	      return contains(name, text);
+	    }
 	  });
+	
 	  var parents = getParentsForList(matches);
 	  var visible = _lodash2.default.union(matches, parents);
 	  return uniq(visible);
@@ -303,8 +318,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // when the tree changes, we select all terms by default
 	      if (prevProps.treeNodes.length !== this.props.treeNodes.length) {
 	        var allTerms = _lodash2.default.map(flat, 'name');
-	        var terms = _lodash2.default.isEmpty(selectedTerms) ? allTerms : selectedTerms;
-	        this.selectTerms(terms);
+	        var _terms = _lodash2.default.isEmpty(selectedTerms) ? allTerms : selectedTerms;
+	        this.selectTerms(_terms);
 	      }
 	    }
 	  }, {

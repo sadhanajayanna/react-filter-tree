@@ -1,6 +1,6 @@
 {
   "name": "react-filter-tree",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "",
   "main": "dist/react-filter-tree.js",
   "scripts": {
@@ -29,6 +29,7 @@
     "babel-preset-stage-2": "^6.5.0",
     "babel-register": "^6.5.1",
     "chai": "^3.5.0",
+    "colors": "^1.1.2",
     "css-loader": "^0.23.1",
     "eslint-plugin-react": "^3.16.1",
     "lodash": "^4.11.1",

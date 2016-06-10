@@ -99,7 +99,14 @@ describe('tree utilities', function () {
     let visible = _.filter(flatToggled, node => node.visible)
 
     expect(visible.length).to.equal(8) // derived from hand-counting
-    expect(visible.length).to.equal(manyMatches.length)
+  })
+
+  it('getToggledTree should also handle an array of terms ', function () {
+    let toggledTree = getToggledTree(tree, [MANY_MATCHES, 'lo'])
+    let flatToggled = getFlattenedTree(toggledTree)
+    let visible = _.filter(flatToggled, node => node.visible)
+
+    expect(visible.length).to.equal(11) // derived from hand-counting
   })
 
   it('should have an empty tree for a bad term', function () {

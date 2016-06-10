@@ -52,8 +52,25 @@ export function treesAreEqual (treeA, treeB) {
 export function getVisibleMatches (tree, text) {
   if (_.isEmpty(text)) return []
 
+  function contains (name, terms) {
+    let filtered = _.filter(terms, (term) => {
+      return _.includes(name, _.lowerCase(term))
+    })
+
+    return !_.isEmpty(filtered)
+  }
+
   let flat = getFlattenedTree(tree)
-  let matches = _.filter(flat, node => node.name.toLowerCase().indexOf(text.toLowerCase()) > -1)
+  let matches = _.filter(flat, (node) => {
+    let name = _.lowerCase(node.name)
+
+    if (_.isString(text)) {
+      return name.indexOf(_.lowerCase(text)) > -1
+    } else if (_.isArray(text)) {
+      return contains(name, text)
+    }
+  })
+
   let parents = getParentsForList(matches)
   let visible = _.union(matches, parents)
   return uniq(visible)
