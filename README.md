@@ -22,3 +22,10 @@ python -m SimpleHTTPServer
 ```
 
 You should be able to reach the demo at: [http://localhost:8000/demo.html](http://localhost:8000/demo.html)
+
+# Publishing Changes
+1. Update the version in `package.json`
+2. Run `npm run build`
+3. Add a git tag for the same version, e.g. `git tag 2.1.1`
+4. Don't forget to push up the tags too, e.g. `git push --tags`
+5. Once everything is updated on GitHub, `npm publish`
