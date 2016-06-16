@@ -157,7 +157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  function contains(name, terms) {
 	    var filtered = _lodash2.default.filter(terms, function (term) {
-	      return _lodash2.default.includes(name, _lodash2.default.lowerCase(term));
+	      return _lodash2.default.isEqual(name, _lodash2.default.lowerCase(term));
 	    });
 	
 	    return !_lodash2.default.isEmpty(filtered);
