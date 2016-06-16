@@ -54,7 +54,7 @@ export function getVisibleMatches (tree, text) {
 
   function contains (name, terms) {
     let filtered = _.filter(terms, (term) => {
-      return _.includes(name, _.lowerCase(term))
+      return _.isEqual(name, _.lowerCase(term))
     })
 
     return !_.isEmpty(filtered)
