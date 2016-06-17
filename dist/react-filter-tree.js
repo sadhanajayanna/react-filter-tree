@@ -170,7 +170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (_lodash2.default.isString(text)) {
 	      return name.indexOf(_lodash2.default.lowerCase(text)) > -1;
 	    } else if (_lodash2.default.isArray(text)) {
-	      return contains(name, text);
+	      return text.indexOf(node.name) > -1;
 	    }
 	  });
 	
@@ -647,6 +647,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var hideDeselectAll = _props6.hideDeselectAll;
 	      var includeParentNodes = _props6.includeParentNodes;
 	      var filterTerm = _props6.filterTerm;
+	      var placeholder = _props6.placeholder;
 	
 	
 	      var debounced = _lodash2.default.debounce(this.handleTypeaheadChange.bind(this), 250);
@@ -663,7 +664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'input-search-container' },
-	          _react2.default.createElement('input', { type: 'search', onChange: typeAheadHandler.bind(this) })
+	          _react2.default.createElement('input', { type: 'search', placeholder: placeholder, onChange: typeAheadHandler.bind(this) })
 	        ),
 	        _react2.default.createElement('span', { className: 'separator' }),
 	        _react2.default.createElement(Tree, this.props)
@@ -681,7 +682,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  selectedTerms: _react2.default.PropTypes.array.isRequired,
 	  hideDeselectAll: _react2.default.PropTypes.bool,
 	  includeParentNodes: _react2.default.PropTypes.bool.isRequired,
-	  filterTerm: _react2.default.PropTypes.string.isRequired
+	  filterTerm: _react2.default.PropTypes.string.isRequired,
+	  placeholder: _react2.default.PropTypes.string.isRequired
 	};
 	exports.default = FilterTree;
 
