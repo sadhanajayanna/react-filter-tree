@@ -408,7 +408,8 @@ class FilterTree extends Component {
     selectedTerms: React.PropTypes.array.isRequired,
     hideDeselectAll: React.PropTypes.bool,
     includeParentNodes: React.PropTypes.bool.isRequired,
-    filterTerm: React.PropTypes.string.isRequired
+    filterTerm: React.PropTypes.string.isRequired,
+    placeholder: React.PropTypes.string.isRequired
   };
 
   componentDidMount () {
@@ -434,7 +435,8 @@ class FilterTree extends Component {
       selectedTerms,
       hideDeselectAll,
       includeParentNodes,
-      filterTerm
+      filterTerm,
+      placeholder
     } = this.props
 
     let debounced = _.debounce(this.handleTypeaheadChange.bind(this), 250)
@@ -448,7 +450,7 @@ class FilterTree extends Component {
     return (
       <div className="filter-tree">
         <div className="input-search-container">
-          <input type="search" onChange={typeAheadHandler.bind(this)} />
+          <input type="search" placeholder={placeholder} onChange={typeAheadHandler.bind(this)} />
         </div>
 
         <span className="separator"></span>
