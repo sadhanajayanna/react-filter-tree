@@ -67,7 +67,7 @@ export function getVisibleMatches (tree, text) {
     if (_.isString(text)) {
       return name.indexOf(_.lowerCase(text)) > -1
     } else if (_.isArray(text)) {
-      return contains(name, text) 
+      return contains(name, text)
     }
   })
 
@@ -76,7 +76,7 @@ export function getVisibleMatches (tree, text) {
   return uniq(visible)
 }
 
-export function getParentsForList (list) {
+export function getParentsForList (list) {  
   let mapped = _.map(list, node => {
     return getParents(node)
   })
