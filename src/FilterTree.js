@@ -76,7 +76,7 @@ export function getVisibleMatches (tree, text) {
   return uniq(visible)
 }
 
-export function getParentsForList (list) {  
+export function getParentsForList (list) {
   let mapped = _.map(list, node => {
     return getParents(node)
   })
