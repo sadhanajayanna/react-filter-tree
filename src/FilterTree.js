@@ -67,7 +67,7 @@ export function getVisibleMatches (tree, text) {
     if (_.isString(text)) {
       return name.indexOf(_.lowerCase(text)) > -1
     } else if (_.isArray(text)) {
-      return text.indexOf(node.name) > -1;
+      return contains(name, text);
     }
   })
 
