@@ -170,7 +170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (_lodash2.default.isString(text)) {
 	      return name.indexOf(_lodash2.default.lowerCase(text)) > -1;
 	    } else if (_lodash2.default.isArray(text)) {
-	      return text.indexOf(node.name) > -1;
+	      return contains(name, text);
 	    }
 	  });
 	
